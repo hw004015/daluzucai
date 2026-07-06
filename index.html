@@ -252,7 +252,9 @@ header .sub{font-size:14px;color:var(--gray);margin-top:6px}
     <button class="tab-btn active" data-tab="dashboard"><span class="icon">🏠</span>首页</button>
     <button class="tab-btn" data-tab="schedule"><span class="icon">📅</span>赛程</button>
     <button class="tab-btn" data-tab="bracket"><span class="icon">🌲</span>对阵图</button>
+    <button class="tab-btn" data-tab="r16"><span class="icon">🔮</span>1/8前瞻</button>
     <button class="tab-btn" data-tab="tools"><span class="icon">🧮</span>工具箱</button>
+    <button class="tab-btn" data-tab="calc"><span class="icon">🖩</span>计算器</button>
     <button class="tab-btn" data-tab="stats"><span class="icon">📊</span>数据</button>
   </nav>
 
@@ -354,6 +356,82 @@ header .sub{font-size:14px;color:var(--gray);margin-top:6px}
       </div>
     </div>
   </div>
+
+  <!-- ========================================== -->
+  <!-- TAB 6: R16 PREVIEW -->
+  <!-- ========================================== -->
+  <div class="tab-panel" id="panel-r16">
+    <div class="section-title">🔮 1/8 决赛前瞻 & 赛事猜想</div>
+    <div id="r16List"></div>
+    <div class="tool-section" style="margin-top:20px">
+      <h3>🏆 冠军路径猜想</h3>
+      <div id="championPath" style="font-size:14px;line-height:2"></div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAB 7: CALCULATOR -->
+  <!-- ========================================== -->
+  <div class="tab-panel" id="panel-calc">
+    <div class="stats-grid">
+      <div class="tool-section">
+        <h3>💰 赔率回报计算器</h3>
+        <div class="form-group">
+          <label>投注金额（元）</label>
+          <input type="number" id="calcStake" value="100" min="1" step="1">
+        </div>
+        <div class="form-group">
+          <label>赔率（欧赔）</label>
+          <input type="number" id="calcOdds" value="2.50" min="1.01" step="0.01">
+        </div>
+        <button class="btn" onclick="calcReturn()">计算回报</button>
+        <div class="result-box" id="calcReturnResult">
+          <span style="color:var(--gray)">输入金额和赔率后计算</span>
+        </div>
+      </div>
+      <div class="tool-section">
+        <h3>📊 串关计算器</h3>
+        <div class="form-group">
+          <label>投注金额（元）</label>
+          <input type="number" id="parlayStake" value="100" min="1" step="1">
+        </div>
+        <div class="form-group">
+          <label>赔率（用逗号分隔，如 1.8,2.0,1.5）</label>
+          <input type="text" id="parlayOdds" value="1.80,2.00,1.50" placeholder="1.8,2.0,1.5">
+        </div>
+        <button class="btn" onclick="calcParlay()">计算串关</button>
+        <div class="result-box" id="parlayCalcResult">
+          <span style="color:var(--gray)">输入金额和多个赔率后计算</span>
+        </div>
+      </div>
+      <div class="tool-section">
+        <h3>📈 盈亏统计器</h3>
+        <div class="form-group">
+          <label>总投注金额（元）</label>
+          <input type="number" id="plTotalStake" value="500" min="0" step="1">
+        </div>
+        <div class="form-group">
+          <label>总回报金额（元）</label>
+          <input type="number" id="plTotalReturn" value="620" min="0" step="1">
+        </div>
+        <button class="btn" onclick="calcPL()">计算盈亏</button>
+        <div class="result-box" id="plResult">
+          <span style="color:var(--gray)">输入投注和回报后计算</span>
+        </div>
+      </div>
+      <div class="tool-section">
+        <h3>🎯 比分概率换算</h3>
+        <div class="form-group">
+          <label>胜平负概率（% 用逗号分隔，如 60,25,15）</label>
+          <input type="text" id="probInput" value="60,25,15" placeholder="60,25,15">
+        </div>
+        <button class="btn" onclick="calcProbToOdds()">换算赔率</button>
+        <div class="result-box" id="probOddsResult">
+          <span style="color:var(--gray)">输入胜平负概率换算隐含赔率</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -376,17 +454,17 @@ const MATCHES = [
   {id:7, date:'7/1',time:'09:00', home:'墨西哥',away:'厄瓜多尔',hflag:'🇲🇽',aflag:'🇪🇨',
    hscore:2,ascore:0,played:true,winner:'墨西哥',scorers:'Quinones 22\' / Jimenez 31\'',group:'1/16',venue:'墨西哥城'},
   {id:8, date:'7/2',time:'00:00', home:'英格兰',away:'刚果(金)',hflag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',aflag:'🇨🇩',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'亚特兰大',prediction:'英格兰胜 2-0',risk:'low'},
+   hscore:2,ascore:1,played:true,winner:'英格兰',scorers:'Cipenga 7\' / Kane 52\', 63\'',group:'1/16',venue:'亚特兰大'},
   {id:9, date:'7/2',time:'04:00', home:'比利时',away:'塞内加尔',hflag:'🇧🇪',aflag:'🇸🇳',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'西雅图',prediction:'高风险 倾向塞内加尔不败',risk:'high'},
+   hscore:3,ascore:2,played:true,winner:'比利时',scorers:'Lukaku 85\' / Tielemans 88\', 120+5\' pen',group:'1/16',venue:'西雅图'},
   {id:10,date:'7/2',time:'08:00', home:'美国',away:'波黑',hflag:'🇺🇸',aflag:'🇧🇦',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'圣克拉拉',prediction:'美国胜 2-0',risk:'low'},
+   hscore:2,ascore:0,played:true,winner:'美国',scorers:'Pulisic 38\' / Balogun 56\'',group:'1/16',venue:'圣克拉拉'},
   {id:11,date:'7/3',time:'03:00', home:'西班牙',away:'奥地利',hflag:'🇪🇸',aflag:'🇦🇹',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'洛杉矶',prediction:'西班牙胜 1-0',risk:'medium'},
+   hscore:3,ascore:0,played:true,winner:'西班牙',scorers:'Oyarzabal 22\', 67\' / Porro 51\'',group:'1/16',venue:'洛杉矶'},
   {id:12,date:'7/3',time:'07:00', home:'葡萄牙',away:'克罗地亚',hflag:'🇵🇹',aflag:'🇭🇷',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'多伦多',prediction:'平局概率大 C罗vs魔笛',risk:'high'},
+   hscore:2,ascore:1,played:true,winner:'葡萄牙',scorers:'Ronaldo 58\' pen / Modric 74\' / Ramos 90+2\' 绝杀',group:'1/16',venue:'多伦多'},
   {id:13,date:'7/3',time:'11:00', home:'瑞士',away:'阿尔及利亚',hflag:'🇨🇭',aflag:'🇩🇿',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'温哥华',prediction:'瑞士胜 1-0',risk:'medium'},
+   hscore:2,ascore:0,played:true,winner:'瑞士',scorers:'Embolo 10\' / Ndoye 46\'',group:'1/16',venue:'温哥华'},
   {id:14,date:'7/4',time:'02:00', home:'澳大利亚',away:'埃及',hflag:'🇦🇺',aflag:'🇪🇬',
    hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'达拉斯',prediction:'五五开 萨拉赫成疑',risk:'high'},
   {id:15,date:'7/4',time:'06:00', home:'阿根廷',away:'佛得角',hflag:'🇦🇷',aflag:'🇨🇻',
@@ -396,11 +474,13 @@ const MATCHES = [
 ];
 
 const TOP_SCORERS = [
-  {name:'Messi (🇦🇷)',goals:6,team:'阿根廷'},
   {name:'Mbappe (🇫🇷)',goals:6,team:'法国'},
+  {name:'Messi (🇦🇷)',goals:6,team:'阿根廷'},
+  {name:'Kane (🏴󠁧󠁢󠁥󠁮󠁧󠁿)',goals:5,team:'英格兰'},
   {name:'Haaland (🇳🇴)',goals:5,team:'挪威'},
-  {name:'Dembele (🇫🇷)',goals:4,team:'法国'},
-  {name:'Manzambi (🇨🇭)',goals:3,team:'瑞士'},
+  {name:'Oyarzabal (🇪🇸)',goals:4,team:'西班牙'},
+  {name:'Ronaldo (🇵🇹)',goals:3,team:'葡萄牙'},
+  {name:'Embolo (🇨🇭)',goals:3,team:'瑞士'},
 ];
 
 const OPTA_PROB = [
@@ -411,15 +491,26 @@ const OPTA_PROB = [
 ];
 
 const UPSET_RISK = [
-  {match:'比利时 vs 塞内加尔',risk:95,note:'塞内加尔反击专克慢传控'},
-  {match:'葡萄牙 vs 克罗地亚',risk:85,note:'C罗vs魔笛 克罗地亚淘汰赛基因'},
   {match:'澳大利亚 vs 埃及',risk:80,note:'五五开 萨拉赫腿筋成疑'},
-  {match:'瑞士 vs 阿尔及利亚',risk:60,note:'前任主帅太了解瑞士'},
   {match:'哥伦比亚 vs 加纳',risk:55,note:'加纳曾零封英格兰'},
-  {match:'西班牙 vs 奥地利',risk:40,note:'西班牙零封但进攻便秘'},
-  {match:'英格兰 vs 刚果(金)',risk:25,note:'铁桶阵但实力差距大'},
-  {match:'美国 vs 波黑',risk:20,note:'东道主主场优势'},
   {match:'阿根廷 vs 佛得角',risk:5,note:'实力悬殊'},
+  {match:'葡萄牙 vs 西班牙(1/8)',risk:75,note:'伊比利亚德比 C罗vs亚马尔'},
+  {match:'美国 vs 比利时(1/8)',risk:70,note:'东道主冲黄金一代'},
+  {match:'墨西哥 vs 英格兰(1/8)',risk:60,note:'凯恩状态火热'},
+  {match:'巴西 vs 挪威(1/8)',risk:55,note:'哈兰德挑战桑巴防线'},
+  {match:'法国 vs 巴拉圭(1/8)',risk:15,note:'法国碾压级优势'},
+];
+
+// 1/8 Final Matchups
+const R16_MATCHES = [
+  {id:'r1',date:'7/6',time:'04:00',home:'加拿大',away:'摩洛哥',hflag:'🇨🇦',aflag:'🇲🇦',venue:'洛杉矶',prediction:'摩洛哥晋级 1-0',note:'北非黑马继续狂飙'},
+  {id:'r2',date:'7/6',time:'09:00',home:'巴西',away:'挪威',hflag:'🇧🇷',aflag:'🇳🇴',venue:'休斯顿',prediction:'巴西晋级 2-1',note:'哈兰德vs桑巴防线 火星撞地球'},
+  {id:'r3',date:'7/7',time:'02:00',home:'法国',away:'巴拉圭',hflag:'🇫🇷',aflag:'🇵🇾',venue:'纽约/新泽西',prediction:'法国晋级 3-0',note:'姆巴佩冲击射手王'},
+  {id:'r4',date:'7/7',time:'06:00',home:'墨西哥',away:'英格兰',hflag:'🇲🇽',aflag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',venue:'墨西哥城',prediction:'英格兰点球晋级',note:'阿兹特克主场vs三狮军团 五五开'},
+  {id:'r5',date:'7/7',time:'10:00',home:'美国',away:'比利时',hflag:'🇺🇸',aflag:'🇧🇪',venue:'圣克拉拉',prediction:'比利时晋级 2-1',note:'东道主最后一搏'},
+  {id:'r6',date:'7/8',time:'03:00',home:'葡萄牙',away:'西班牙',hflag:'🇵🇹',aflag:'🇪🇸',venue:'达拉斯',prediction:'西班牙晋级 2-1',note:'🔥伊比利亚德比！C罗vs亚马尔'},
+  {id:'r7',date:'7/8',time:'07:00',home:'瑞士',away:'待定',hflag:'🇨🇭',aflag:'❓',venue:'温哥华',prediction:'瑞士晋级',note:'对哥伦比亚/加纳胜者'},
+  {id:'r8',date:'7/9',time:'06:00',home:'待定',away:'待定',hflag:'❓',aflag:'❓',venue:'迈阿密',prediction:'阿根廷晋级',note:'阿根廷/佛得角 vs 澳大利亚/埃及'},
 ];
 
 // ============================================
@@ -736,10 +827,109 @@ function renderStats(){
 }
 
 // ============================================
+// R16 PREVIEW
+// ============================================
+function renderR16(){
+  const list = document.getElementById('r16List');
+  let html = '';
+  R16_MATCHES.forEach(m=>{
+    html += `<div class="match-card upcoming" style="border-left:3px solid var(--gold)">
+      <div class="date-badge">${m.date}<br>${m.time}</div>
+      <div class="teams"><span class="flag">${m.hflag}</span>${m.home} <span style="color:var(--gray)">vs</span> ${m.away}<span class="flag">${m.aflag}</span></div>
+      <span class="result-badge" style="background:rgba(240,192,64,0.12);color:var(--gold)">🔮 ${m.prediction}</span>
+      <div class="info">${m.venue}<br><span style="font-size:11px;color:var(--gray)">${m.note}</span></div>
+    </div>`;
+  });
+  list.innerHTML = html;
+
+  document.getElementById('championPath').innerHTML = `
+    <strong>上半区预测路径：</strong><br>
+    🏆 <strong>决赛</strong>：法国 vs 阿根廷<br>
+    <br>
+    <strong>上半区半决赛</strong>：西班牙 vs 法国<br>
+    ├─ 西班牙 → 胜葡萄牙 → 胜美国/比利时胜者<br>
+    └─ 法国 → 胜巴拉圭 → 胜英格兰/墨西哥胜者<br>
+    <br>
+    <strong>下半区半决赛</strong>：巴西 vs 阿根廷<br>
+    ├─ 巴西 → 胜挪威 → 胜摩洛哥/加拿大胜者<br>
+    └─ 阿根廷 → 胜佛得角 → 胜澳大利亚/埃及 → 胜哥伦比亚/瑞士<br>
+    <br>
+    🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:18px">阿根廷卫冕</span> 或 <span style="color:var(--gold);font-size:18px">法国登顶</span><br>
+    ⚽ <strong>金靴猜想</strong>：<span style="color:var(--gold)">Mbappe</span> vs <span style="color:var(--gold)">Messi</span> 终极对决
+  `;
+}
+
+// ============================================
+// CALCULATOR
+// ============================================
+function calcReturn(){
+  const stake = parseFloat(document.getElementById('calcStake').value) || 0;
+  const odds = parseFloat(document.getElementById('calcOdds').value) || 0;
+  const ret = (stake * odds).toFixed(2);
+  const profit = (ret - stake).toFixed(2);
+  document.getElementById('calcReturnResult').innerHTML = `
+    投注：<strong>${stake}</strong> 元<br>
+    回报：<span class="highlight">${ret}</span> 元<br>
+    盈利：<span style="color:${profit>=0?'var(--teal)':'var(--red)'};font-size:18px">${profit>=0?'+'+profit:profit}</span> 元<br>
+    回报率：<strong>${Math.round(profit/stake*100)}%</strong>
+  `;
+}
+
+function calcParlay(){
+  const stake = parseFloat(document.getElementById('parlayStake').value) || 0;
+  const oddsStr = document.getElementById('parlayOdds').value;
+  const odds = oddsStr.split(',').map(o=>parseFloat(o.trim())).filter(o=>!isNaN(o)&&o>0);
+  if(odds.length < 2){
+    document.getElementById('parlayCalcResult').innerHTML = '<span style="color:var(--red)">请输入至少2个赔率，用逗号分隔</span>';
+    return;
+  }
+  const totalOdds = odds.reduce((a,b)=>a*b,1);
+  const ret = (stake * totalOdds).toFixed(2);
+  const profit = (ret - stake).toFixed(2);
+  document.getElementById('parlayCalcResult').innerHTML = `
+    ${odds.length}串1 组合赔率：<span class="highlight">${totalOdds.toFixed(2)}</span><br>
+    投注 <strong>${stake}</strong> 元 → 预期回报 <span class="highlight">${ret}</span> 元<br>
+    盈利：<span style="color:${profit>=0?'var(--teal)':'var(--red)'};font-size:18px">${profit>=0?'+'+profit:profit}</span> 元
+    <br><span style="font-size:11px;color:var(--gray)">每多串一场，中奖概率指数级下降</span>
+  `;
+}
+
+function calcPL(){
+  const totalStake = parseFloat(document.getElementById('plTotalStake').value) || 0;
+  const totalReturn = parseFloat(document.getElementById('plTotalReturn').value) || 0;
+  const profit = totalReturn - totalStake;
+  const roi = totalStake > 0 ? (profit/totalStake*100).toFixed(1) : 0;
+  const emoji = profit > 0 ? '🟢' : profit < 0 ? '🔴' : '⚪';
+  document.getElementById('plResult').innerHTML = `
+    ${emoji} 总盈亏：<span style="color:${profit>=0?'var(--teal)':'var(--red)'};font-size:24px;font-weight:900">${profit>=0?'+'+profit.toFixed(2):profit.toFixed(2)}</span> 元<br>
+    投资回报率(ROI)：<strong>${roi}%</strong><br>
+    <span style="font-size:12px;color:var(--gray)">${profit>0?'继续保持！':'注意控制风险'}</span>
+  `;
+}
+
+function calcProbToOdds(){
+  const probStr = document.getElementById('probInput').value;
+  const probs = probStr.split(',').map(p=>parseFloat(p.trim())).filter(p=>!isNaN(p)&&p>0);
+  if(probs.length !== 3 || Math.abs(probs.reduce((a,b)=>a+b,0)-100) > 5){
+    document.getElementById('probOddsResult').innerHTML = '<span style="color:var(--red)">请输入3个概率值（胜,平,负），总和约100%</span>';
+    return;
+  }
+  const sum = probs.reduce((a,b)=>a+b,0);
+  const odds = probs.map(p=> (100/(p/sum*100)).toFixed(2));
+  document.getElementById('probOddsResult').innerHTML = `
+    胜：概率 ${(probs[0]/sum*100).toFixed(0)}% → 隐含赔率 <span class="highlight">${odds[0]}</span><br>
+    平：概率 ${(probs[1]/sum*100).toFixed(0)}% → 隐含赔率 <span class="highlight">${odds[1]}</span><br>
+    负：概率 ${(probs[2]/sum*100).toFixed(0)}% → 隐含赔率 <span class="highlight">${odds[2]}</span><br>
+    <span style="font-size:11px;color:var(--gray)">注：实际赔率会加上庄家利润(约5-10%)</span>
+  `;
+}
+
+// ============================================
 // INIT
 // ============================================
 renderDashboard();
 renderMatches('all');
+renderR16();
 renderTools();
 renderStats();
 </script>
