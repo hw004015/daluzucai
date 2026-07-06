@@ -474,13 +474,13 @@ const MATCHES = [
 ];
 
 const TOP_SCORERS = [
-  {name:'Mbappe (🇫🇷)',goals:6,team:'法国'},
-  {name:'Messi (🇦🇷)',goals:6,team:'阿根廷'},
-  {name:'Kane (🏴󠁧󠁢󠁥󠁮󠁧󠁿)',goals:5,team:'英格兰'},
-  {name:'Haaland (🇳🇴)',goals:5,team:'挪威'},
+  {name:'Haaland (🇳🇴)',goals:7,team:'挪威'},
+  {name:'Mbappe (🇫🇷)',goals:7,team:'法国'},
+  {name:'Messi (🇦🇷)',goals:7,team:'阿根廷'},
+  {name:'Kane (🏴󠁧󠁢󠁥󠁮󠁧󠁿)',goals:6,team:'英格兰'},
+  {name:'Bellingham (🏴󠁧󠁢󠁥󠁮󠁧󠁿)',goals:4,team:'英格兰'},
   {name:'Oyarzabal (🇪🇸)',goals:4,team:'西班牙'},
   {name:'Ronaldo (🇵🇹)',goals:3,team:'葡萄牙'},
-  {name:'Embolo (🇨🇭)',goals:3,team:'瑞士'},
 ];
 
 const OPTA_PROB = [
@@ -503,14 +503,28 @@ const UPSET_RISK = [
 
 // 1/8 Final Matchups
 const R16_MATCHES = [
-  {id:'r1',date:'7/6',time:'04:00',home:'加拿大',away:'摩洛哥',hflag:'🇨🇦',aflag:'🇲🇦',venue:'洛杉矶',prediction:'摩洛哥晋级 1-0',note:'北非黑马继续狂飙'},
-  {id:'r2',date:'7/6',time:'09:00',home:'巴西',away:'挪威',hflag:'🇧🇷',aflag:'🇳🇴',venue:'休斯顿',prediction:'巴西晋级 2-1',note:'哈兰德vs桑巴防线 火星撞地球'},
-  {id:'r3',date:'7/7',time:'02:00',home:'法国',away:'巴拉圭',hflag:'🇫🇷',aflag:'🇵🇾',venue:'纽约/新泽西',prediction:'法国晋级 3-0',note:'姆巴佩冲击射手王'},
-  {id:'r4',date:'7/7',time:'06:00',home:'墨西哥',away:'英格兰',hflag:'🇲🇽',aflag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',venue:'墨西哥城',prediction:'英格兰点球晋级',note:'阿兹特克主场vs三狮军团 五五开'},
-  {id:'r5',date:'7/7',time:'10:00',home:'美国',away:'比利时',hflag:'🇺🇸',aflag:'🇧🇪',venue:'圣克拉拉',prediction:'比利时晋级 2-1',note:'东道主最后一搏'},
-  {id:'r6',date:'7/8',time:'03:00',home:'葡萄牙',away:'西班牙',hflag:'🇵🇹',aflag:'🇪🇸',venue:'达拉斯',prediction:'西班牙晋级 2-1',note:'🔥伊比利亚德比！C罗vs亚马尔'},
-  {id:'r7',date:'7/8',time:'07:00',home:'瑞士',away:'待定',hflag:'🇨🇭',aflag:'❓',venue:'温哥华',prediction:'瑞士晋级',note:'对哥伦比亚/加纳胜者'},
-  {id:'r8',date:'7/9',time:'06:00',home:'待定',away:'待定',hflag:'❓',aflag:'❓',venue:'迈阿密',prediction:'阿根廷晋级',note:'阿根廷/佛得角 vs 澳大利亚/埃及'},
+  {id:'r1',date:'7/5',time:'04:00',home:'加拿大',away:'摩洛哥',hflag:'🇨🇦',aflag:'🇲🇦',venue:'洛杉矶',
+   hscore:0,ascore:3,played:true,winner:'摩洛哥',scorers:'Ounahi x2 / Rahimi 90+\'',note:'北非黑马狂飙 首支非洲连续两届八强'},
+  {id:'r2',date:'7/5',time:'08:00',home:'法国',away:'巴拉圭',hflag:'🇫🇷',aflag:'🇵🇾',venue:'纽约/新泽西',
+   hscore:1,ascore:0,played:true,winner:'法国',scorers:'Mbappe 66\' pen',note:'姆巴佩点射 法国挺进八强'},
+  {id:'r3',date:'7/6',time:'04:00',home:'巴西',away:'挪威',hflag:'🇧🇷',aflag:'🇳🇴',venue:'休斯顿',
+   hscore:1,ascore:2,played:true,winner:'挪威',scorers:'Haaland 80\',90\' / Neymar 90+10\' pen',note:'💥史诗级爆冷！哈兰德双响送巴西回家 内马尔跪地痛哭'},
+  {id:'r4',date:'7/6',time:'08:00',home:'墨西哥',away:'英格兰',hflag:'🇲🇽',aflag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',venue:'墨西哥城',
+   hscore:2,ascore:3,played:true,winner:'英格兰',scorers:'Bellingham 36\',38\' / Kane 60\' pen',note:'贝林厄姆双响 三狮10人应战险胜'},
+  {id:'r5',date:'7/7',time:'03:00',home:'美国',away:'比利时',hflag:'🇺🇸',aflag:'🇧🇪',venue:'圣克拉拉',
+   hscore:null,ascore:null,played:false,winner:null,scorers:'',note:'东道主最后一搏'},
+  {id:'r6',date:'7/7',time:'07:00',home:'葡萄牙',away:'西班牙',hflag:'🇵🇹',aflag:'🇪🇸',venue:'达拉斯',
+   hscore:null,ascore:null,played:false,winner:null,scorers:'',note:'🔥伊比利亚德比！C罗vs亚马尔'},
+  {id:'r7',date:'7/7',time:'11:00',home:'瑞士',away:'哥伦比亚',hflag:'🇨🇭',aflag:'🇨🇴',venue:'温哥华',
+   hscore:null,ascore:null,played:false,winner:null,scorers:'',note:'欧洲纪律 vs 南美激情'},
+  {id:'r8',date:'7/8',time:'06:00',home:'阿根廷',away:'埃及',hflag:'🇦🇷',aflag:'🇪🇬',venue:'迈阿密',
+   hscore:null,ascore:null,played:false,winner:null,scorers:'',note:'梅西冲击八强 萨拉赫归来的埃及'},
+];
+
+// Quarter Finals
+const QF_MATCHES = [
+  {home:'法国',away:'摩洛哥',hflag:'🇫🇷',aflag:'🇲🇦',note:'非洲最强矛盾 vs 欧洲最强之矛',date:'7/10'},
+  {home:'英格兰',away:'挪威',hflag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',aflag:'🇳🇴',note:'凯恩vs哈兰德 英超金靴内战',date:'7/10'},
 ];
 
 // ============================================
@@ -832,30 +846,50 @@ function renderStats(){
 function renderR16(){
   const list = document.getElementById('r16List');
   let html = '';
-  R16_MATCHES.forEach(m=>{
-    html += `<div class="match-card upcoming" style="border-left:3px solid var(--gold)">
-      <div class="date-badge">${m.date}<br>${m.time}</div>
-      <div class="teams"><span class="flag">${m.hflag}</span>${m.home} <span style="color:var(--gray)">vs</span> ${m.away}<span class="flag">${m.aflag}</span></div>
-      <span class="result-badge" style="background:rgba(240,192,64,0.12);color:var(--gold)">🔮 ${m.prediction}</span>
-      <div class="info">${m.venue}<br><span style="font-size:11px;color:var(--gray)">${m.note}</span></div>
+
+  // Show Quarter Finals first
+  html += '<div class="match-date-header">🏆 1/4 决赛对阵（已确定）</div>';
+  QF_MATCHES.forEach(m=>{
+    html += `<div class="match-card upcoming" style="border-left:3px solid var(--gold);border-color:rgba(240,192,64,0.5)">
+      <div class="date-badge">${m.date}<br>待定</div>
+      <div class="teams"><span class="flag" style="font-size:28px">${m.hflag}</span><strong>${m.home}</strong> <span style="color:var(--gold);font-size:18px;font-weight:900">VS</span> <strong>${m.away}</strong><span class="flag" style="font-size:28px">${m.aflag}</span></div>
+      <span class="result-badge" style="background:rgba(240,192,64,0.15);color:var(--gold)">🏆 1/4决赛</span>
+      <div class="info"><span style="font-size:11px;color:var(--gray)">${m.note}</span></div>
     </div>`;
+  });
+
+  html += '<div class="match-date-header">📅 1/8 决赛（4场已赛 / 4场未赛）</div>';
+  R16_MATCHES.forEach(m=>{
+    if(m.played){
+      html += `<div class="match-card played">
+        <div class="date-badge">${m.date}<br>${m.time}</div>
+        <div class="teams"><span class="flag">${m.hflag}</span>${m.home} <span class="score">${m.hscore}-${m.ascore}</span> ${m.away}<span class="flag">${m.aflag}</span></div>
+        <div class="result-badge">✅ ${m.winner} 晋级</div>
+        <div class="info"><div class="scorers">⚽ ${m.scorers}</div><span style="font-size:11px;color:var(--gray)">${m.note}</span></div>
+      </div>`;
+    } else {
+      html += `<div class="match-card upcoming" style="border-left:3px solid var(--gold)">
+        <div class="date-badge">${m.date}<br>${m.time}</div>
+        <div class="teams"><span class="flag">${m.hflag}</span>${m.home} <span style="color:var(--gray)">vs</span> ${m.away}<span class="flag">${m.aflag}</span></div>
+        <span class="result-badge" style="background:rgba(240,192,64,0.12);color:var(--gold)">🔮 待赛</span>
+        <div class="info"><span style="font-size:11px;color:var(--gray)">${m.note}</span></div>
+      </div>`;
+    }
   });
   list.innerHTML = html;
 
   document.getElementById('championPath').innerHTML = `
-    <strong>上半区预测路径：</strong><br>
-    🏆 <strong>决赛</strong>：法国 vs 阿根廷<br>
+    <strong>🏆 最新冠军路径分析（7/6更新）</strong><br><br>
+    <strong>上半区：</strong><br>
+    🇫🇷 法国（已进八强）→ 1/4 vs 摩洛哥 → 半决赛 vs 美国/比利时/葡萄牙/西班牙 胜者<br>
     <br>
-    <strong>上半区半决赛</strong>：西班牙 vs 法国<br>
-    ├─ 西班牙 → 胜葡萄牙 → 胜美国/比利时胜者<br>
-    └─ 法国 → 胜巴拉圭 → 胜英格兰/墨西哥胜者<br>
+    <strong>下半区：</strong><br>
+    🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰（已进八强）→ 1/4 vs 挪威 → 半决赛 vs 阿根廷/埃及/瑞士/哥伦比亚 胜者<br>
     <br>
-    <strong>下半区半决赛</strong>：巴西 vs 阿根廷<br>
-    ├─ 巴西 → 胜挪威 → 胜摩洛哥/加拿大胜者<br>
-    └─ 阿根廷 → 胜佛得角 → 胜澳大利亚/埃及 → 胜哥伦比亚/瑞士<br>
-    <br>
-    🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:18px">阿根廷卫冕</span> 或 <span style="color:var(--gold);font-size:18px">法国登顶</span><br>
-    ⚽ <strong>金靴猜想</strong>：<span style="color:var(--gold)">Mbappe</span> vs <span style="color:var(--gold)">Messi</span> 终极对决
+    💥 <strong>最大冷门</strong>：🇳🇴 哈兰德双响淘汰巴西！挪威队史首进八强<br>
+    🔥 <strong>最大看点</strong>：1/4决赛 <span style="color:var(--gold)">英格兰vs挪威</span>——凯恩PK哈兰德<br>
+    🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:18px">法国</span> vs <span style="color:var(--gold);font-size:18px">阿根廷</span> 会师决赛？<br>
+    ⚽ <strong>金靴争夺</strong>：<span style="color:var(--gold)">Haaland(7)</span> vs <span style="color:var(--gold)">Mbappe(7)</span> vs <span style="color:var(--gold)">Messi(7)</span> 三国杀
   `;
 }
 
