@@ -467,11 +467,11 @@ const MATCHES = [
   {id:13,date:'7/3',time:'11:00', home:'瑞士',away:'阿尔及利亚',hflag:'🇨🇭',aflag:'🇩🇿',
    hscore:2,ascore:0,played:true,winner:'瑞士',scorers:'Embolo 10\' / Ndoye 46\'',group:'1/16',venue:'温哥华'},
   {id:14,date:'7/4',time:'02:00', home:'澳大利亚',away:'埃及',hflag:'🇦🇺',aflag:'🇪🇬',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'达拉斯',prediction:'五五开 萨拉赫成疑',risk:'high'},
+   hscore:1,ascore:1,played:true,winner:'埃及',scorers:'Ashour 13\' / Hany OG 55\' | 点球 4-2 埃及胜',group:'1/16',venue:'达拉斯',pens:'4-2'},
   {id:15,date:'7/4',time:'06:00', home:'阿根廷',away:'佛得角',hflag:'🇦🇷',aflag:'🇨🇻',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'迈阿密',prediction:'阿根廷胜 3-0',risk:'verylow'},
+   hscore:3,ascore:2,played:true,winner:'阿根廷',scorers:'Messi 29\' / Duarte 59\' / Lisandro 92\' / Cabral 103\' / Borges OG 111\'',group:'1/16',venue:'迈阿密',pens:''},
   {id:16,date:'7/4',time:'09:30', home:'哥伦比亚',away:'加纳',hflag:'🇨🇴',aflag:'🇬🇭',
-   hscore:null,ascore:null,played:false,winner:null,scorers:'',group:'1/16',venue:'堪萨斯城',prediction:'哥伦比亚胜 1-0',risk:'medium'},
+   hscore:1,ascore:0,played:true,winner:'哥伦比亚',scorers:'Arias 14\'',group:'1/16',venue:'堪萨斯城'},
 ];
 
 const TOP_SCORERS = [
@@ -492,11 +492,13 @@ const OPTA_PROB = [
 ];
 
 const UPSET_RISK = [
-  {match:'澳大利亚 vs 埃及',risk:80,note:'五五开 萨拉赫腿筋成疑'},
-  {match:'哥伦比亚 vs 加纳',risk:55,note:'加纳曾零封英格兰'},
-  {match:'阿根廷 vs 佛得角',risk:5,note:'实力悬殊'},
   {match:'葡萄牙 vs 西班牙(1/8)',risk:75,note:'伊比利亚德比 C罗vs亚马尔'},
-  {match:'美国 vs 比利时(1/8)',risk:70,note:'东道主冲黄金一代'},
+  {match:'美国 vs 比利时(1/8)',risk:70,note:'东道主挑战黄金一代'},
+  {match:'瑞士 vs 哥伦比亚(1/8)',risk:55,note:'欧洲纪律vs南美激情'},
+  {match:'阿根廷 vs 埃及(1/8)',risk:10,note:'阿根廷碾压级优势'},
+  {match:'挪威 vs 英格兰(1/4)',risk:70,note:'哈兰德单核挑战三狮军团'},
+  {match:'法国 vs 摩洛哥(1/4)',risk:25,note:'法国牌面碾压'},
+];
   {match:'墨西哥 vs 英格兰(1/8)',risk:60,note:'凯恩状态火热'},
   {match:'巴西 vs 挪威(1/8)',risk:55,note:'哈兰德挑战桑巴防线'},
   {match:'法国 vs 巴拉圭(1/8)',risk:15,note:'法国碾压级优势'},
