@@ -361,8 +361,9 @@ header .sub{font-size:14px;color:var(--gray);margin-top:6px}
   <!-- TAB 6: R16 PREVIEW -->
   <!-- ========================================== -->
   <div class="tab-panel" id="panel-r16">
-    <div class="section-title">🔮 1/8 决赛前瞻 & 赛事猜想</div>
+    <div class="section-title">🔮 1/8 & 1/4 决赛 · 赛前分析 + 竞彩建议</div>
     <div id="r16List"></div>
+    <div id="r16Analysis"></div>
     <div class="tool-section" style="margin-top:20px">
       <h3>🏆 冠军路径猜想</h3>
       <div id="championPath" style="font-size:14px;line-height:2"></div>
@@ -891,6 +892,92 @@ function renderR16(){
     🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:18px">法国</span> vs <span style="color:var(--gold);font-size:18px">阿根廷</span> 会师决赛？<br>
     ⚽ <strong>金靴争夺</strong>：<span style="color:var(--gold)">Haaland(7)</span> vs <span style="color:var(--gold)">Mbappe(7)</span> vs <span style="color:var(--gold)">Messi(7)</span> 三国杀
   `;
+
+  // Match Analysis for upcoming matches
+  const analysisDiv = document.getElementById('r16Analysis');
+  const upcomingR16 = R16_MATCHES.filter(m=>!m.played);
+  let analysisHTML = '<div class="match-date-header">🔍 剩余1/8决赛 赛前分析 & 竞彩建议</div>';
+
+  upcomingR16.forEach(m=>{
+    const tips = getBettingTips(m);
+    analysisHTML += `
+    <div class="tool-section" style="margin-bottom:16px">
+      <h3>${m.hflag} ${m.home} vs ${m.away} ${m.aflag} <span style="font-size:12px;color:var(--gray)">${m.date} ${m.time} · ${m.venue}</span></h3>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:12px">📝 ${tips.analysis}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px">
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>💰 胜负建议：</strong><span style="color:var(--gold)">${tips.win}</span>
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>🎯 让球：</strong>${tips.handicap}
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>📊 大小球：</strong>${tips.overUnder}
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>⏱ 半全场：</strong><span style="color:var(--teal)">${tips.htft}</span>
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>📐 比分参考：</strong>${tips.score}
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>⚡ 爆冷指数：</strong>${tips.upset}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  // Also add QF analysis
+  const upcomingQF = QF_MATCHES;
+  analysisHTML += '<div class="match-date-header">🔮 1/4决赛 前瞻</div>';
+  upcomingQF.forEach(m=>{
+    const qtips = getQFTips(m);
+    analysisHTML += `
+    <div class="tool-section" style="margin-bottom:16px">
+      <h3>${m.hflag} ${m.home} vs ${m.away} ${m.aflag} <span style="font-size:12px;color:var(--gray)">预计 ${m.date}</span></h3>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:12px">📝 ${qtips.analysis}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:13px">
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>💰 胜负建议：</strong><span style="color:var(--gold)">${qtips.win}</span>
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>⏱ 半全场：</strong><span style="color:var(--teal)">${qtips.htft}</span>
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>📐 比分参考：</strong>${qtips.score}
+        </div>
+        <div style="background:var(--card2);padding:10px;border-radius:8px">
+          <strong>⚡ 爆冷指数：</strong>${qtips.upset}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  analysisDiv.innerHTML = analysisHTML;
+}
+
+function getBettingTips(m){
+  const tips = {
+    '美国':{win:'比利时不败（双选平/负）',handicap:'比利时-0.5',overUnder:'大球 2.5',htft:'平平 / 平负',score:'1-2 / 1-1',upset:'⭐⭐⭐⭐',analysis:'东道主美国主场气势强，但比利时黄金一代大赛经验碾压。普利西奇vs德布劳内，中场差距是胜负手。比利时小组赛慢热但淘汰赛会提档。'},
+    '葡萄牙':{win:'西班牙不败（双选平/负）',handicap:'西班牙-0.5',overUnder:'2-3球',htft:'平平 / 平胜',score:'1-2 / 1-1',upset:'⭐⭐⭐',analysis:'伊比利亚德比！C罗41岁世界杯最后一舞，亚马尔18岁世界杯第一舞。西班牙34场不败金身，佩德里掌控中场。葡萄牙体能存疑——上场120分钟恶战。拖入加时西班牙优势更大。'},
+    '瑞士':{win:'瑞士胜',handicap:'瑞士-0.5',overUnder:'小球 2',htft:'平胜 / 胜胜',score:'1-0 / 2-0',upset:'⭐⭐',analysis:'瑞士小组赛防守稳固，小组头名不是偶然。哥伦比亚末轮消耗大，J罗面对扎卡+弗罗伊勒的绞杀将很痛苦。瑞士大概率小胜。'},
+    '阿根廷':{win:'阿根廷胜（稳胆）',handicap:'阿根廷-1.5',overUnder:'大球 2.5',htft:'胜胜 / 平胜',score:'3-0 / 2-0',upset:'⭐',analysis:'卫冕冠军vs埃及新军。梅西状态炸裂（7球），阿根廷签运极佳，此役过后大概率直通四强。埃及虽有萨拉赫回归但整体差距太大，阿根廷碾压级优势。'},
+  };
+  for(const [k,v] of Object.entries(tips)){
+    if(m.home.includes(k)||m.away.includes(k)) return v;
+  }
+  return {win:'数据不足',handicap:'—',overUnder:'—',htft:'—',score:'—',upset:'—',analysis:'赛前分析尚待更新'};
+}
+
+function getQFTips(m){
+  const tips = {
+    '法国':{win:'法国胜（稳胆）',htft:'胜胜',score:'2-0 / 3-0',upset:'⭐⭐',analysis:'姆巴佩领衔的法国攻击群vs摩洛哥铁血防线。摩洛哥连斩加拿大展现韧性，但法国牌面碾压。姆巴佩距离金靴只差进球，战意拉满。'},
+    '英格兰':{win:'英格兰不败（双选胜/平）',htft:'平胜 / 平平',score:'2-1 / 1-1',upset:'⭐⭐⭐',analysis:'英超金靴内战！凯恩(6球)状态火热，贝林厄姆双响淘汰墨西哥。但挪威有哈兰德(7球)这个X因素——一个机会就能改变比赛。英格兰防线需120%专注。'},
+  };
+  for(const [k,v] of Object.entries(tips)){
+    if(m.home.includes(k)||m.away.includes(k)) return v;
+  }
+  return {win:'待定',htft:'待定',score:'待定',upset:'—',analysis:'待后续更新'};
 }
 
 // ============================================
