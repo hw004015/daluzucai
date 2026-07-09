@@ -197,20 +197,22 @@ const M = [
   {id:18,d:'7/5',t:'08:00',h:'法国',a:'巴拉圭',hf:'🇫🇷',af:'🇵🇾',hs:1,as:0,p:1,w:'法国',s:"Mbappe 66'(p)",v:'纽约',st:'1/8'},
   {id:19,d:'7/6',t:'04:00',h:'巴西',a:'挪威',hf:'🇧🇷',af:'🇳🇴',hs:1,as:2,p:1,w:'挪威',s:"Haaland 80',90' / Neymar 90+10'(p)",v:'休斯顿',st:'1/8'},
   {id:20,d:'7/6',t:'08:00',h:'墨西哥',a:'英格兰',hf:'🇲🇽',af:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',hs:2,as:3,p:1,w:'英格兰',s:"Bellingham 36',38' / Kane 60'(p)",v:'墨西哥城',st:'1/8'},
-  {id:21,d:'7/7',t:'03:00',h:'葡萄牙',a:'西班牙',hf:'🇵🇹',af:'🇪🇸',hs:null,as:null,p:0,w:null,s:'',v:'达拉斯',st:'1/8'},
-  {id:22,d:'7/7',t:'08:00',h:'美国',a:'比利时',hf:'🇺🇸',af:'🇧🇪',hs:null,as:null,p:0,w:null,s:'',v:'圣克拉拉',st:'1/8'},
-  {id:23,d:'7/8',t:'00:00',h:'阿根廷',a:'埃及',hf:'🇦🇷',af:'🇪🇬',hs:null,as:null,p:0,w:null,s:'',v:'迈阿密',st:'1/8'},
-  {id:24,d:'7/8',t:'04:00',h:'瑞士',a:'哥伦比亚',hf:'🇨🇭',af:'🇨🇴',hs:null,as:null,p:0,w:null,s:'',v:'温哥华',st:'1/8'}
+  {id:21,d:'7/7',t:'03:00',h:'葡萄牙',a:'西班牙',hf:'🇵🇹',af:'🇪🇸',hs:0,as:1,p:1,w:'西班牙',s:"Merino 90+1' 绝杀",v:'达拉斯',st:'1/8'},
+  {id:22,d:'7/7',t:'08:00',h:'美国',a:'比利时',hf:'🇺🇸',af:'🇧🇪',hs:1,as:4,p:1,w:'比利时',s:"De Ketelaere 9',33' / Tillman 31' / Vanaken 58' / Lukaku 90+'",v:'圣克拉拉',st:'1/8'},
+  {id:23,d:'7/8',t:'00:00',h:'阿根廷',a:'埃及',hf:'🇦🇷',af:'🇪🇬',hs:3,as:2,p:1,w:'阿根廷',s:"Ibrahim 15' / Zico 67' / Romero 79' / Messi 83' / Enzo 90+2'",v:'迈阿密',st:'1/8'},
+  {id:24,d:'7/8',t:'04:00',h:'瑞士',a:'哥伦比亚',hf:'🇨🇭',af:'🇨🇴',hs:0,as:0,p:1,w:'瑞士',s:"0-0 AET | PK 4-3 瑞士胜",v:'温哥华',st:'1/8',pk:'4-3'}
 ];
 
 const TOP = [
-  {n:'Haaland 🇳🇴',g:7},{n:'Mbappe 🇫🇷',g:7},{n:'Messi 🇦🇷',g:7},
+  {n:'Messi 🇦🇷',g:8},{n:'Mbappe 🇫🇷',g:7},{n:'Haaland 🇳🇴',g:7},
   {n:'Kane 🏴󠁧󠁢󠁥󠁮󠁧󠁿',g:6},{n:'Bellingham 🏴󠁧󠁢󠁥󠁮󠁧󠁿',g:4}
 ];
 
 const QF = [
-  {h:'法国',a:'摩洛哥',hf:'🇫🇷',af:'🇲🇦',d:'7/10',note:'非洲铁壁 vs 欧洲利刃'},
-  {h:'英格兰',a:'挪威',hf:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',af:'🇳🇴',d:'7/12',note:'凯恩 vs 哈兰德 英超金靴内战'}
+  {h:'法国',a:'摩洛哥',hf:'🇫🇷',af:'🇲🇦',d:'7/10',t:'04:00',note:'2022半决赛重演 姆巴佩vs阿什拉夫',v:'波士顿'},
+  {h:'西班牙',a:'比利时',hf:'🇪🇸',af:'🇧🇪',d:'7/11',t:'03:00',note:'传控美学vs反击利刃 比利时黄金一代最后一搏',v:'洛杉矶'},
+  {h:'英格兰',a:'挪威',hf:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',af:'🇳🇴',d:'7/12',t:'05:00',note:'凯恩PK哈兰德 英超金靴内战 最大黑马挑战三狮',v:'迈阿密'},
+  {h:'阿根廷',a:'瑞士',hf:'🇦🇷',af:'🇨🇭',d:'7/12',t:'09:00',note:'2014重演 梅西冲金靴 瑞士时隔72年再进八强',v:'堪萨斯城'}
 ];
 
 const PROB = [
@@ -356,13 +358,13 @@ function RR(){
   adiv.innerHTML=ah;
 
   document.getElementById('championPath').innerHTML=`
-    <strong>🏆 冠军路径（7/6更新）</strong><br><br>
-    <strong>上半区：</strong>🇫🇷法国(已进8强)→1/4 vs 🇲🇦摩洛哥→半决赛 vs 葡萄牙/西班牙/美国/比利时胜者<br>
-    <strong>下半区：</strong>🏴󠁧󠁢󠁥󠁮󠁧󠁿英格兰(已进8强)→1/4 vs 🇳🇴挪威→半决赛 vs 阿根廷/埃及/瑞士/哥伦比亚胜者<br><br>
-    💥 <strong>最大冷门</strong>：🇳🇴哈兰德双响淘汰巴西！挪威队史首进8强<br>
-    🔥 <strong>1/4看点</strong>：<span style="color:var(--gold)">英格兰vs挪威</span>——凯恩PK哈兰德<br>
-    🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:16px">法国</span> vs <span style="color:var(--gold);font-size:16px">阿根廷</span><br>
-    ⚽ <strong>金靴</strong>：<span style="color:var(--gold)">Haaland(7)</span> vs <span style="color:var(--gold)">Mbappe(7)</span> vs <span style="color:var(--gold)">Messi(7)</span>
+    <strong>🏆 冠军路径（1/8全部结束 8强出炉）</strong><br><br>
+    <strong>上半区：</strong>🇫🇷法国 vs 🇲🇦摩洛哥 → 胜者 vs 🇪🇸西班牙/🇧🇪比利时胜者<br>
+    <strong>下半区：</strong>🏴󠁧󠁢󠁥󠁮󠁧󠁿英格兰 vs 🇳🇴挪威 → 胜者 vs 🇦🇷阿根廷/🇨🇭瑞士胜者<br><br>
+    💥 <strong>1/8最大冷门</strong>：🇳🇴哈兰德双响淘汰巴西！C罗&内马尔告别世界杯<br>
+    🔥 <strong>1/4最大看点</strong>：<span style="color:var(--gold)">英格兰vs挪威</span>——凯恩PK哈兰德 英超金靴内战<br>
+    🎯 <strong>冠军猜想</strong>：<span style="color:var(--gold);font-size:16px">法国 vs 阿根廷</span> 重演2022决赛？<br>
+    ⚽ <strong>金靴三国杀</strong>：<span style="color:var(--gold)">Messi(8)</span> vs <span style="color:var(--gold)">Mbappe(7)</span> vs <span style="color:var(--gold)">Haaland(7)</span>
   `;
 }
 
@@ -379,8 +381,10 @@ function GT(m){
 
 function GQ(q){
   const t={
-    '法国':{wi:'法国胜(稳胆)',ht:'胜胜',sc:'2-0 / 3-0',up:'⭐⭐',an:'姆巴佩法国vs摩洛哥铁血防线。摩洛哥3-0加拿大展现韧性，但法国牌面碾压。姆巴佩距金靴只差进球。'},
-    '英格兰':{wi:'英格兰不败(双选胜/平)',ht:'平胜/平平',sc:'2-1 / 1-1',up:'⭐⭐⭐',an:'英超金靴内战！凯恩6球vs哈兰德7球。贝林厄姆双响状态火热，但哈兰德一个机会就能改变比赛。'}
+    '法国':{wi:'法国胜(稳胆)',ht:'胜胜/平胜',sc:'2-0 / 1-0',up:'⭐⭐',an:'2022半决赛重演。姆巴佩7球领跑射手榜，法国本届全胜。琼阿梅尼停赛是中场唯一隐患。摩洛哥有塞巴里伤疑，反击威胁大减。'},
+    '西班牙':{wi:'西班牙胜',ht:'胜胜/平胜',sc:'2-0 / 1-0',up:'⭐⭐⭐',an:'西班牙5场零封创纪录！比利时奥纳纳ACL报销中场真空。德布劳内满血回归但孤掌难鸣。西班牙40年对比利时不败。'},
+    '英格兰':{wi:'英格兰不败(双选胜/平)',ht:'平胜/平平',sc:'2-1 / 1-1',up:'⭐⭐⭐⭐',an:'四场中最高爆冷风险！哈兰德7球神仙状态淘汰巴西。凯恩6球+贝林厄姆双核驱动。英格兰4人黄牌可能留力。'},
+    '阿根廷':{wi:'阿根廷胜(稳胆)',ht:'平胜/胜胜',sc:'2-0 / 1-0',up:'⭐⭐',an:'卫冕冠军牌面碾压。梅西8球领跑金靴。连续两场逆转暴露防线问题但瑞士攻击力有限难构成实质威胁。'}
   };
   for(const[k,v] of Object.entries(t)){if(q.h.includes(k)||q.a.includes(k))return v;}
   return {wi:'待定',ht:'待定',sc:'待定',up:'—',an:'待后续更新'};
